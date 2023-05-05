@@ -1,39 +1,38 @@
-import {Stream} from "stream";
+import { Stream } from "stream";
 
 export interface ChatOptions {
-    proxy?: string;
+  proxy?: string;
 }
 
 export interface Response {
-    text: string | null;
-    other: any;
+  text: string | null;
+  other: any;
 }
 
 export interface ResponseStream {
-    text: Stream;
-    other: any;
+  text: Stream;
+  other: any;
 }
 
 export interface Request {
-    prompt: string;
-    history?: HistoryItem[];
-    options?: any;
+  prompt: string;
+  history?: HistoryItem[];
+  options?: any;
 }
 
 export interface HistoryItem {
-    question?: string;
-    answer?: string;
+  question?: string;
+  answer?: string;
 }
 
-
 export abstract class Chat {
-    protected proxy: string | undefined;
+  protected proxy: string | undefined;
 
-    constructor(options?: ChatOptions) {
-        this.proxy = options?.proxy;
-    }
+  constructor(options?: ChatOptions) {
+    this.proxy = options?.proxy;
+  }
 
-    public abstract ask(req: Request): Promise<Response>
+  public abstract ask(req: Request): Promise<Response>;
 
-    public abstract askStream(req: Request): Promise<ResponseStream>
+  public abstract askStream(req: Request): Promise<ResponseStream>;
 }
