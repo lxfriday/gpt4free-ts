@@ -2,10 +2,13 @@ import { You } from "./model/you";
 import Koa from "koa";
 import Router from "koa-router";
 import bodyParser from "koa-bodyparser";
+import cors from "@koa/cors";
 
 const app = new Koa();
 const router = new Router();
 app.use(bodyParser());
+app.use(cors());
+
 const you = new You({
   proxy: process.env.https_proxy || process.env.http_proxy,
 });
