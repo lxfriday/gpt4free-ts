@@ -12,8 +12,8 @@ interface AskReq {
     prompt: string;
 }
 
-router.get('/ask', async (ctx) => {
-    const {prompt} = ctx.query;
+router.post('/ask', async (ctx) => {
+    const {prompt} = ctx.request.body as any;
     if (!prompt) {
         ctx.body = 'please input prompt';
         return;
@@ -22,8 +22,8 @@ router.get('/ask', async (ctx) => {
     ctx.body = res.text;
 });
 
-router.get('/ask/stream', async (ctx) => {
-    const {prompt} = ctx.query;
+router.post('/ask/stream', async (ctx) => {
+    const {prompt} = ctx.request.body as {prompt?:string};
     if (!prompt) {
         ctx.body = 'please input prompt';
         return;
